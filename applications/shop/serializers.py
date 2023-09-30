@@ -33,6 +33,7 @@ class ShippingAddressSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    transaction_id = serializers.CharField(read_only=True)
     items = OrderItemSerializer(many=True)
     shipping_address = ShippingAddressSerializer()
 
