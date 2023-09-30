@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+
+from .signals import create_transaction_id
 
 
 class TimeStampModel(models.Model):
@@ -87,3 +90,6 @@ class Order(TimeStampModel):
             total = item.get_total_item_price()
             total_price += total
         return total_price
+
+
+post_save.connect(create_transaction_id, sender=Order)
